@@ -50,3 +50,20 @@ async function atualizar(id, dados) {
   
   return result.rows[0] || null;
 }
+
+async function deletar(id) {
+  const result = await pool.query(
+    'DELETE FROM resposta WHERE id_resp = $1',
+    [id]
+  );
+
+  return result.rowCount > 0;
+}
+
+module.exports = {
+  listarTodos,
+  buscarPorId,
+  criar,
+  atualizar,
+  deletar
+};
