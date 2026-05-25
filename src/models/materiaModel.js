@@ -16,3 +16,30 @@ async function buscarPorId(id) {
   );
   return result.rows[0];
 }
+
+async function criar(dados) {
+  const { nome_mat } = dados;
+
+  const sql = `
+    INSERT INTO materia (nome_mat)
+    VALUES ($1)
+    RETURNING *
+  `;
+  
+  const result = await pool.query(
+    sql,
+    [nome_mat]
+  );
+  
+  return result.rows[0];
+}
+
+async function atualizar(id, dados) {
+  const { nome_mat } = dados;
+  
+  const sql = `
+    UPDATE materia
+    SET nome_mat = $1
+    WHERE id_mat = $2
+    RETURNING *
+  `;
