@@ -48,3 +48,27 @@ async function criar(req, res) {
         mensagem: 'Todos os campos são obrigatórios' 
       });
     }
+
+     const novaMateria = await MateriasModel.criar({ 
+      nome_mat
+    });
+    
+    res.status(201).json(novaMateria);
+  } catch (erro) {
+    res.status(500).json({ 
+      mensagem: 'Erro ao criar materia',
+      erro: erro.message 
+    });
+  }
+}
+
+async function atualizar(req, res) {
+  try {
+    const id = parseInt(req.params.id);
+    const { nome_mat} = req.body;
+    
+    if (isNaN(id)) {
+      return res.status(400).json({ 
+        mensagem: 'ID inválido' 
+      });
+    }
