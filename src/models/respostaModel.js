@@ -33,3 +33,20 @@ async function criar(dados) {
   
   return result.rows[0];
 }
+async function atualizar(id, dados) {
+  const { resp_correta, explicacao_prof, contas_url, videoaula } = dados;
+  
+  const sql = `
+    UPDATE resposta
+    SET resp_correta = $1, explicacao_prof = $2, contas_url = $3, videoaula = $4
+    WHERE id_resp = $5
+    RETURNING *
+  `;
+  
+  const result = await pool.query(
+    sql,
+    [resp_correta, explicacao_prof, contas_url, videoaula, id]
+  );
+  
+  return result.rows[0] || null;
+}
