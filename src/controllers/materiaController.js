@@ -72,3 +72,28 @@ async function atualizar(req, res) {
         mensagem: 'ID inválido' 
       });
     }
+
+    if (!nome_mat) {
+      return res.status(400).json({ 
+        mensagem: 'Todos os campos são obrigatórios' 
+      });
+    }
+    
+    const materiaAtualizado = await MateriasModel.atualizar(id, { 
+      nome_mat
+    });
+    
+    if (materiaAtualizado) {
+      res.status(200).json(materiaAtualizado);
+    } else {
+      res.status(404).json({ 
+        mensagem: `Materia ${id} não encontrada` 
+      });
+    }
+  } catch (erro) {
+    res.status(500).json({ 
+      mensagem: 'Erro ao atualizar materia',
+      erro: erro.message 
+    });
+  }
+}
