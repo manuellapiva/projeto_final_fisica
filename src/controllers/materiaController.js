@@ -126,3 +126,11 @@ async function deletar(req, res) {
     });
   }
 }
+
+module.exports = {
+  listarTodos,
+  buscarPorId,
+  criar,
+  atualizar,
+  deletar
+};
