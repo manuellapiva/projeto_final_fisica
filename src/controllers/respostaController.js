@@ -38,3 +38,29 @@ async function buscarPorId(req, res) {
     });
   }
 }
+
+async function criar(req, res) {
+  try {
+    const {resp_correta, explicacao_prof, contas_url, videoaula} = req.body;
+    
+    if (!resp_correta || !explicacao_prof) {
+      return res.status(400).json({ 
+        mensagem: 'Todos os campos são obrigatórios' 
+      });
+    }
+    
+    const novaresposta = await RespostasModel.criar({ 
+    resp_correta,
+    explicacao_prof, 
+    contas_url,
+    videoaula
+    });
+    
+    res.status(201).json(novaresposta);
+  } catch (erro) {
+    res.status(500).json({ 
+      mensagem: 'Erro ao criar resposta',
+      erro: erro.message 
+    });
+  }
+}
