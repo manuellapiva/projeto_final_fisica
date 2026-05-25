@@ -97,3 +97,32 @@ async function atualizar(req, res) {
     });
   }
 }
+
+async function deletar(req, res) {
+  try {
+    const id = parseInt(req.params.id);
+    
+    if (isNaN(id)) {
+      return res.status(400).json({ 
+        mensagem: 'ID inválido' 
+      });
+    }
+    
+    const deletado = await MateriasModel.deletar(id);
+    
+    if (deletado) {
+      res.status(200).json({ 
+        mensagem: `Materia ${id} removida com sucesso` 
+      });
+    } else {
+      res.status(404).json({ 
+        mensagem: `Materia ${id} não encontrada` 
+      });
+    }
+  } catch (erro) {
+    res.status(500).json({ 
+      mensagem: 'Erro ao deletar materia',
+      erro: erro.message 
+    });
+  }
+}
