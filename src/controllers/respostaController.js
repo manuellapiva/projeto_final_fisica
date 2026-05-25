@@ -64,3 +64,77 @@ async function criar(req, res) {
     });
   }
 }
+async function atualizar(req, res) {
+  try {
+    const id = parseInt(req.params.id);
+    const { id_resp, resp_correta, explicacao_prof, contas_url,videoaula} = req.body;
+    
+    if (isNaN(id)) {
+      return res.status(400).json({ 
+        mensagem: 'ID inválido' 
+      });
+    }
+    
+    if (! id_resp || !resp_correta || !explicacao_prof) {
+      return res.status(400).json({ 
+        mensagem: 'Todos os campos são obrigatórios' 
+      });
+    }
+     const respostaAtualizado = await RespostasModel.atualizar(id, { 
+      id_resp, 
+      resp_correta,
+      explicacao_prof, 
+      contas_url,
+      videoaula
+    });
+    
+    if (respostaAtualizado) {
+      res.status(200).json(respostaAtualizado);
+    } else {
+      res.status(404).json({ 
+        mensagem: `Resposta ${id} não encontrada` 
+      });
+    }
+  } catch (erro) {
+    res.status(500).json({ 
+      mensagem: 'Erro ao atualizar resposta',
+      erro: erro.message 
+    });
+  }
+}
+async function deletar(req, res) {
+  try {
+    const id = parseInt(req.params.id);
+    
+    if (isNaN(id)) {
+      return res.status(400).json({ 
+        mensagem: 'ID inválido' 
+      });
+    }
+    
+    const deletado = await RespostasModel.deletar(id);
+    
+    if (deletado) {
+      res.status(200).json({ 
+        mensagem: `Resposta ${id} removida com sucesso` 
+      });
+    } else {
+      res.status(404).json({ 
+        mensagem: `Resposta ${id} não encontrada` 
+      });
+    }
+  } catch (erro) {
+    res.status(500).json({ 
+      mensagem: 'Erro ao deletar resposta',
+      erro: erro.message 
+    });
+  }
+}
+
+module.exports = {
+  listarTodos,
+  buscarPorId,
+  criar,
+  atualizar,
+  deletar
+};
