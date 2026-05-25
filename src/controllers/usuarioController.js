@@ -41,9 +41,9 @@ async function buscarPorId(req, res) {
 
 async function criar(req, res) {
   try {
-    const { nome, email, senha } = req.body;
+    const { nome, email, password } = req.body;
     
-    if (!nome || !email || !senha) {
+    if (!nome || !email || !password) {
       return res.status(400).json({ 
         mensagem: 'Todos os campos são obrigatórios' 
       });
@@ -52,7 +52,7 @@ async function criar(req, res) {
     const novoUsuario = await UsuarioModel.criar({ 
       nome,
       email,
-      senha
+      password
     });
     
     res.status(201).json(novoUsuario);
@@ -68,7 +68,7 @@ async function criar(req, res) {
 async function atualizar(req, res) {
   try {
     const id = parseInt(req.params.id);
-    const { nome, email, senha } = req.body;
+    const { nome, email, password } = req.body;
     
     if (isNaN(id)) {
       return res.status(400).json({ 
@@ -76,7 +76,7 @@ async function atualizar(req, res) {
       });
     }
     
-    if (!nome || !email || !senha) {
+    if (!nome || !email || !password) {
       return res.status(400).json({ 
         mensagem: 'Todos os campos são obrigatórios' 
       });
@@ -85,7 +85,7 @@ async function atualizar(req, res) {
     const usuarioAtualizado = await UsuarioModel.atualizar(id, { 
       nome,
       email,
-      senha
+      password
     });
     
     if (usuarioAtualizado) {
