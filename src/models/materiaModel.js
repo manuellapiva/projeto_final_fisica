@@ -43,3 +43,29 @@ async function atualizar(id, dados) {
     WHERE id_mat = $2
     RETURNING *
   `;
+
+  
+  const result = await pool.query(
+    sql,
+    [nome_mat, id]
+  );
+  
+  return result.rows[0] || null;
+}
+
+async function deletar(id) {
+  const result = await pool.query(
+    'DELETE FROM materia WHERE id_mat = $1',
+    [id]
+  );
+
+  return result.rowCount > 0;
+}
+
+module.exports = {
+  listarTodos,
+  buscarPorId,
+  criar,
+  atualizar,
+  deletar
+};
