@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BuscFísica - Questões</title>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;700;800&display=swap&quot; rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap&quot; rel="stylesheet">
+  <link rel="stylesheet" href="questoes.css">
+  <link rel="icon" type="image" href="./assets/img/logo_buscfisica.png">
+</head>
+<body>
+
+    <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <h1>BUSCFÍSICA</h1>
+      <img src="./assets/img/logo_buscfisica.png" alt="logo buscfísica">
+    </div>
+    <nav class="navbar">
+      <a href="./home.html">HOME</a>
+      <a class= "active" href="./questoes.html">QUESTÕES</a>
+      <a href="./formulas.html">FÓRMULAS</a>
+      <button id="logoutButton" class="btn secondary">SAIR</button>
+    </nav>
+  </header>
+
+  <section class="filtros-container">
+
+        <div class="filtros">
+
+            <div class="filtro-grupo">
+                <label for="filtroVestibular">Vestibular</label>
+                <select id="filtroVestibular">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+
+            <div class="filtro-grupo">
+                <label for="filtroMateria">Matéria</label>
+                <select id="filtroMateria">
+                    <option value="">Todas</option>
+                </select>
+            </div>
+
+            <div class="filtro-grupo">
+                <label for="filtroTopico">Tópico</label>
+                <select id="filtroTopico">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+            <div class="filtro-grupo">
+                <button id="btnBuscar" class="btn-buscar">
+                    BUSCAR
+                </button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- CONTEÚDO DAS QUESTÕES -->
+    <main class="questoes-section">
+
+        <!-- Mensagem de carregamento -->
+        <div id="loadingMessage" class="mensagem" style="display: none;">
+            Carregando questões...
+        </div>
+
+        <!-- Mensagem de erro -->
+        <div id="errorMessage" class="mensagem erro" style="display: none;">
+            Erro ao carregar questões.
+        </div>
+
+        <!-- Mensagem sem resultados -->
+        <div id="emptyMessage" class="mensagem" style="display: none;">
+            Nenhuma questão encontrada.
+        </div>
+
+        <!-- Container onde o JS irá renderizar as questões -->
+        <div id="questoesContainer">
+
+        </div>
+
+    </main>
+
+    <!-- MODAL DE RESPOSTA -->
+    <div id="modalResposta" class="modal" style="display: none;">
+
+        <div class="modal-content">
+
+            <span class="fechar-modal" onclick="fecharModalResposta()">
+                &times;
+            </span>
+
+            <h2>Resposta</h2>
+
+            <div id="conteudoResposta"></div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <h2>BUSCFÍSICA</h2>
+      <button id="logoutButton" class="btn secondary">SAIR</button>
+    </div>
+    <div class="footer-column">
+      <h4>CONTATO</h4>
+      <p>BUSCFISICA7@GMAIL.COM</p>
+      <p>(19) 99653-1673</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>DESENVOLVEDORES</h4>
+      <p>AYLA CRISTINA DA SILVA VILELA</p>
+      <p>GABRIELLA CAMACHO STAVARENGO</p>
+      <p>GUSTAVO MILLAMONTE</p>
+      <p>MARIA VITÓRIA GUEDES FERREIRA</p>
+      <p>MANUELLA DA SILVA PIVA</p>
+    </div>
+  </footer>
+  <script src="./script.js"></script>
+</body>
+</html>

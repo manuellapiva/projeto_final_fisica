@@ -112,6 +112,13 @@ main {
   transition: 0.3s;
 }
 
+.btn-search-a, .btn-formulas-a {
+  color: white;
+  font-size: 25px;
+  text-decoration: none;
+  transition: 0.3s
+}
+
 .btn-search:hover {
   transform: translateY(-3px);
 }

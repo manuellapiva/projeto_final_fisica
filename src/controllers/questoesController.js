@@ -13,6 +13,7 @@ async function listarTodos(req, res) {
 }
 
 async function buscarPorId(req, res) {
+  console.log("CONTROLLER CHAMADO");
   try {
     const id = parseInt(req.params.id);
     

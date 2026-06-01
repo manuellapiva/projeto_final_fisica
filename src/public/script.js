@@ -2,35 +2,39 @@
 // VARIÁVEIS GLOBAIS
 // ========================================
 
-let produtoEmEdicao = null;
+let todasQuestoes = [];
+let vestibulares = [];
+let topicos = [];
+let materias = [];
 
-function getAuthHeaders() {
-    const token = localStorage.getItem('jwtToken');
+// ========================================
+// ELEMENTOS
+// ========================================
 
-    return {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-    };
-}
+const vestibularSelect = document.getElementById("filtroVestibular");
+const topicoSelect = document.getElementById("filtroTopico");
+const materiaSelect = document.getElementById("filtroMateria");
+const questoesContainer = document.getElementById("questoesContainer");
+const btnBuscar = document.getElementById("btnBuscar");
 
 // ========================================
 // FUNÇÕES AUXILIARES
 // ========================================
 
-// Mostra uma mensagem modal
-function mostrarMensagem(mensagem, tipo = 'info') {
-    const modal = document.getElementById('modalMessage');
-    const modalText = document.getElementById('modalText');
-    
-    modalText.textContent = mensagem;
-    modal.style.display = 'flex';
-    
-    // Define a cor baseado no tipo
-    if (tipo === 'sucesso') {
-        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-    } else if (tipo === 'erro') {
-        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-    }
+function mostrarLoading() {
+    questoesContainer.innerHTML = `
+        <div class="loading">
+            Carregando questões...
+        </div>
+    `;
+}
+
+function mostrarErro(msg) {
+    questoesContainer.innerHTML = `
+        <div class="erro">
+            ${msg}
+        </div>
+    `;
 }
 
 const logoutButton = document.getElementById('logoutButton');
@@ -42,329 +46,370 @@ function redirectToLogin() {
 
 logoutButton.addEventListener('click', redirectToLogin);
 
-// Fecha o modal de mensagens
-function fecharModal() {
-    document.getElementById('modalMessage').style.display = 'none';
+// ========================================
+// CARREGAR FILTROS
+// ========================================
+
+async function carregarVestibulares() {
+    try {
+
+        const response = await fetch('/vestibulares');
+
+        if (!response.ok) {
+            throw new Error('Erro ao buscar vestibulares');
+        }
+
+        vestibulares = await response.json();
+
+        vestibularSelect.innerHTML = `
+            <option value="">Todos</option>
+        `;
+
+        vestibulares.forEach(vestibular => {
+
+            vestibularSelect.innerHTML += `
+                <option value="${vestibular.id}">
+                    ${`${vestibular.nome} - ${vestibular.sigla}`}
+                </option>
+            `;
+
+        });
+
+    } catch (erro) {
+        console.error(erro);
+    }
 }
 
-// Limpa o formulário
-function limparFormulario() {
-    document.getElementById('prodForm').reset();
-    produtoEmEdicao = null;
-    document.querySelector('.form-section h2').textContent = 'Adicionar ou Editar Produto';
+async function carregarTopicos() {
+    try {
+
+        const response = await fetch('/topico');
+
+        if (!response.ok) {
+            throw new Error('Erro ao buscar tópicos');
+        }
+
+        topicos = await response.json();
+
+        topicoSelect.innerHTML = `
+            <option value="">Todos</option>
+        `;
+
+        topicos.forEach(topico => {
+
+            topicoSelect.innerHTML += `
+                <option value="${topico.id_top}">
+                    ${topico.nome_top}
+                </option>
+            `;
+            console.log(topico);
+        });
+
+    } catch (erro) {
+        console.error(erro);
+    }
 }
 
-// Formata preco para exibição
-function formatarpreco(preco) {
-    if (!preco) return '';
-    return preco.replace(/(\d{4})(\d{2})/, '$1,$2');
+async function carregarMaterias() {
+    try {
+
+        const response = await fetch('/materia');
+
+        if (!response.ok) {
+            throw new Error('Erro ao buscar matérias');
+        }
+
+        materias = await response.json();
+
+        materiaSelect.innerHTML = `
+            <option value="">Todas</option>
+        `;
+
+        materias.forEach(materia => {
+
+            materiaSelect.innerHTML += `
+                <option value="${materia.id_mat}">
+                    ${materia.nome_mat}
+                </option>
+            `;
+            console.log(materia);
+        });
+
+    } catch (erro) {
+        console.error(erro);
+    }
 }
 
 // ========================================
-// OPERAÇÕES COM A API
+// QUESTÕES
 // ========================================
 
-// Busca todos os produtos
-async function carregarProdutos() {
-    const loadingMessage = document.getElementById('loadingMessage');
-    const emptyMessage = document.getElementById('emptyMessage');
-    const prodsList = document.getElementById('prodsList');
-    
-    loadingMessage.style.display = 'block';
-    prodsList.innerHTML = '';
-    
+async function carregarQuestoes() {
+
+    mostrarLoading();
+
     try {
-        const resposta = await fetch('/produtos', {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
-            }
-        });
-        
-        if (!resposta.ok) {
-            throw new Error('Erro ao buscar produtos');
+
+        const response = await fetch('/questoes');
+
+        if (!response.ok) {
+            throw new Error('Erro ao carregar questões');
         }
-        
-        const produtos = await resposta.json();
-        loadingMessage.style.display = 'none';
-        
-        if (produtos.length === 0) {
-            emptyMessage.style.display = 'block';
-            prodsList.innerHTML = '';
-        } else {
-            emptyMessage.style.display = 'none';
-            exibirTabela(produtos);
-        }
+
+        todasQuestoes = await response.json();
+
+        console.log("QUESTÕES:", todasQuestoes);
+
+        renderizarQuestoes(todasQuestoes);
+
     } catch (erro) {
-        loadingMessage.style.display = 'none';
-        emptyMessage.style.display = 'block';
-        console.error('Erro:', erro);
-        mostrarMensagem('Erro ao carregar os produtos. Tente novamente.', 'erro');
+
+        console.error(erro);
+        mostrarErro('Erro ao carregar questões.');
+
     }
 }
 
-// Cria um novo produto
-async function criarProduto(dados) {
-    try {
-        const resposta = await fetch('/produtos', {
-            method: 'POST',
-            headers: getAuthHeaders(),
-            body: JSON.stringify(dados)
-        });
-        
-        if (!resposta.ok) {
-            const erro = await resposta.json();
-            throw new Error(erro.error || 'Erro ao criar produto');
+// ========================================
+// FILTRO
+// ========================================
+
+function filtrarQuestoes() {
+
+    const vestibular = vestibularSelect.value;
+    const topico = topicoSelect.value;
+    const materia = materiaSelect.value;
+
+    console.log("Vestibular:", vestibular);
+    console.log("Topico:", topico);
+    console.log("Materia:", materia);
+
+    let resultado = [...todasQuestoes];
+
+    if (vestibular) {
+
+        const vestibularSelecionado = vestibulares.find(
+            v => String(v.id) === vestibular
+        );
+
+        if (vestibularSelecionado) {
+
+            resultado = resultado.filter(
+                q => q.vestibular === vestibularSelecionado.nome
+            );
         }
-        
-        const novoProduto = await resposta.json();
-        mostrarMensagem('Produto cadastrado com sucesso!', 'sucesso');
-        limparFormulario();
-        carregarProdutos();
-        
-    } catch (erro) {
-        console.error('Erro:', erro);
-        mostrarMensagem('Erro: ' + erro.message, 'erro');
     }
+
+    if (topico) {
+
+        const topicoSelecionado = topicos.find(
+            t => String(t.id_top) === topico
+        );
+
+        if (topicoSelecionado) {
+
+            resultado = resultado.filter(
+                q => q.topico === topicoSelecionado.nome_top
+            );
+        }
+    }
+
+    if (materia) {
+
+        const materiaSelecionada = materias.find(
+            m => String(m.id_mat) === materia
+        );
+
+        if (materiaSelecionada) {
+
+            resultado = resultado.filter(
+                q => q.materia === materiaSelecionada.nome_mat
+            );
+        }
+    }
+
+    console.log("Resultado:", resultado);
+
+    renderizarQuestoes(resultado);
 }
 
-// Atualiza um produto
-async function atualizarProduto(id, dados) {
-    try {
-        const resposta = await fetch(`/produtos/${id}`, {
-            method: 'PUT',
-            headers: getAuthHeaders(),
-            body: JSON.stringify(dados)
-        });
-        
-        if (!resposta.ok) {
-            const erro = await resposta.json();
-            throw new Error(erro.error || 'Erro ao atualizar produtos');
-        }
-        
-        const produtoAtualizado = await resposta.json();
-        mostrarMensagem('Produto atualizado com sucesso!', 'sucesso');
-        limparFormulario();
-        carregarProdutos();
-        
-    } catch (erro) {
-        console.error('Erro:', erro);
-        mostrarMensagem('Erro: ' + erro.message, 'erro');
-    }
-}
+// ========================================
+// RENDERIZAÇÃO
+// ========================================
 
-// Deleta um produto
-async function deletarProduto(id) {
-    if (!confirm('Tem certeza que deseja deletar este produto?')) {
+function renderizarQuestoes(lista) {
+
+    if (!lista.length) {
+
+        questoesContainer.innerHTML = `
+            <div class="sem-questoes">
+                Nenhuma questão encontrada.
+            </div>
+        `;
+
         return;
     }
-    
-    try {
-        const resposta = await fetch(`/produtos/${id}`, {
-    method: 'DELETE',
-    headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
-    }
-});
-        
-        if (!resposta.ok) {
-            const erro = await resposta.json();
-            throw new Error(erro.error || 'Erro ao deletar produto');
-        }
-        
-        mostrarMensagem('Produto removido com sucesso!', 'sucesso');
-        carregarProdutos();
-        
-    } catch (erro) {
-        console.error('Erro:', erro);
-        mostrarMensagem('Erro: ' + erro.message, 'erro');
-    }
+
+    questoesContainer.innerHTML = lista.map(questao => `
+
+        <div class="questao-box">
+
+            <div class="tags">
+
+                <span>
+                    ${questao.vestibular || ''}
+                </span>
+
+                <span>
+                    ${questao.ano || ''}
+                </span>
+
+                <span>
+                    ${questao.topico || ''}
+                </span>
+
+                <span>
+                    ${questao.materia || ''}
+                </span>
+
+                <span>
+                    ${questao.dificuldade || ''}
+                </span>
+
+            </div>
+
+            <div class="questao-card">
+
+                <div class="enunciado">
+                    ${questao.enunciado || ''}
+                </div>
+
+                ${
+                    questao.imagem_url
+                        ? `<img src="${questao.imagem_url}" class="imagem-questao">`
+                        : ''
+                }
+
+                <div class="alternativas">
+
+                    <button class="alternativa">
+                        ${questao.alt_a || ''}
+                    </button>
+
+                    <button class="alternativa">
+                        ${questao.alt_b || ''}
+                    </button>
+
+                    <button class="alternativa">
+                        ${questao.alt_c || ''}
+                    </button>
+
+                    <button class="alternativa">
+                        ${questao.alt_d || ''}
+                    </button>
+
+                    ${
+                        questao.alt_e
+                            ? `
+                                <button class="alternativa">
+                                    ${questao.alt_e}
+                                </button>
+                            `
+                            : ''
+                    }
+
+                </div>
+
+                <button
+                    id="btn-resposta-${questao.idq}"
+                    class="btn-resposta"
+                    onclick="mostrarResposta(${questao.idq})"
+                >
+                    VER RESPOSTA
+                </button>
+                <div
+                    id="resposta-${questao.idq}"
+                    class="caixa-resposta"
+                ></div>
+
+            </div>
+
+        </div>
+
+    `).join('');
 }
 
 // ========================================
-// EXIBIÇÃO DE DADOS
+// RESPOSTA
 // ========================================
 
-// Exibe a tabela de produtos
-function exibirTabela(produtos) {
-    const prodsList = document.getElementById('prodsList');
-    
-    let html = `
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Preço</th>
-                    <th>Estoque</th>
-                    <th>Categoria</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
-    
-    produtos.forEach(produto => {
-        html += `
-            <tr>
-                <td>#${produto.id}</td>
-                <td>${produto.nome}</td>
-                <td>${formatarpreco(produto.preco)}</td>
-                <td>${produto.estoque}</td>
-                <td>${produto.categoria}</td>
-                <td class="acoes">
-                    <button class="btn btn-edit" onclick="editarProduto(${produto.id}, '${produto.nome}', '${produto.preco}', '${produto.estoque}', '${produto.categoria}')">✏️ Editar</button>
-                    <button class="btn btn-danger" onclick="deletarProduto(${produto.id})">🗑️ Deletar</button>
-                </td>
-            </tr>
+async function mostrarResposta(id) {
+
+    const caixa = document.getElementById(`resposta-${id}`);
+    const botao = document.getElementById(`btn-resposta-${id}`);
+
+    if (caixa.style.display === "block") {
+
+        caixa.style.display = "none";
+        botao.textContent = "VER RESPOSTA";
+
+        return;
+    }
+
+    try {
+
+        const response = await fetch(`/questoes/${id}`);
+
+        if (!response.ok) {
+            throw new Error('Erro ao buscar resposta');
+        }
+
+        const resp = await response.json();
+
+        console.log(resp);
+
+        caixa.innerHTML = `
+            <div class="resposta-conteudo">
+
+                <h3>Resposta Correta</h3>
+
+                <p>${resp.resp_correta}</p>
+
+                <hr>
+
+                <p>${resp.explicacao_prof || ''}</p>
+
+            </div>
         `;
-    });
-    
-    html += `
-            </tbody>
-        </table>
-    `;
-    
-    prodsList.innerHTML = html;
-}
 
-// Carrega os dados do produto no formulário para edição
-function editarProduto(id, nome, preco, estoque, categoria) {
-    produtoEmEdicao = id;
-    
-    document.getElementById('nome').value = nome;
-    document.getElementById('preco').value = preco;
-    document.getElementById('estoque').value = estoque;
-    document.getElementById('categoria').value = categoria;
-    
-    document.querySelector('.form-section h2').textContent = `Editando Produto #${id}`;
-    
-    // Scroll até o formulário
-    document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
-}
+        caixa.style.display = "block";
 
-// ========================================
-// BUSCA E FILTRO
-// ========================================
+        botao.textContent = "OCULTAR RESPOSTA";
 
-// Busca produtos no backend
-async function buscarProdutos(tipo, valor) {
-    const loadingMessage = document.getElementById('loadingMessage');
-    const emptyMessage = document.getElementById('emptyMessage');
-    const prodsList = document.getElementById('prodsList');
-    
-    loadingMessage.style.display = 'block';
-    prodsList.innerHTML = '';
-    
-    try {
-        let url = '';
-
-        if (tipo === 'nome') {
-            url = `/produtos/buscar/nome/${encodeURIComponent(valor)}`;
-        } else if (tipo === 'id') {
-            url = `/produtos/buscar/id/${valor}`;
-        }
-
-        const resposta = await fetch(url, {
-    headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
-    }
-});
-        
-        if (!resposta.ok) {
-            throw new Error('Erro ao buscar produtos');
-        }
-        
-        let produtos = await resposta.json();
-
-        if (!Array.isArray(produtos)) {
-            produtos = produtos ? [produtos] : [];
-        }
-
-        loadingMessage.style.display = 'none';
-        
-        if (produtos.length === 0) {
-            emptyMessage.style.display = 'block';
-            prodsList.innerHTML = '';
-        } else {
-            emptyMessage.style.display = 'none';
-            exibirTabela(produtos);
-        }
     } catch (erro) {
-        loadingMessage.style.display = 'none';
-        emptyMessage.style.display = 'block';
-        console.error('Erro:', erro);
-        mostrarMensagem('Erro ao buscar os produtos. Tente novamente.', 'erro');
-    }
-}
 
+        console.error(erro);
 
-// Filtra produtos pela busca (agora busca no backend)
-function filtrarProdutos() {
-    const searchInput = document.getElementById('searchInput');
-    const searchType = document.getElementById('searchType');
-    const valor = searchInput.value.trim();
-    
-    if (valor === '') {
-        // Se vazio, carrega todos
-        carregarProdutos();
-    } else {
-        // Busca no backend
-        buscarProdutos(searchType.value, valor);
     }
 }
 
 // ========================================
-// EVENT LISTENERS
+// EVENTOS
 // ========================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Carrega os produtos ao abrir a página
-    carregarProdutos();
-    
-    // Formulário de envio
-    document.getElementById('prodForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const nome = document.getElementById('nome').value.trim();
-        const preco = document.getElementById('preco').value.trim();
-        const estoque = document.getElementById('estoque').value.trim();
-        const categoria = document.getElementById('categoria').value.trim();
-        
-        // Validação básica
-        if (!nome || !preco || !estoque || !categoria) {
-            mostrarMensagem('Por favor, preencha todos os campos!', 'erro');
-            return;
-        }
-        
-        const dados = { nome, preco, estoque, categoria };
-        
-        if (produtoEmEdicao) {
-            atualizarProduto(produtoEmEdicao, dados);
-        } else {
-            criarProduto(dados);
-        }
-    });
-    
-    // Botão Limpar Formulário
-    document.getElementById('btnLimpar').addEventListener('click', limparFormulario);
-    
-    // Botão Recarregar Lista
-    document.getElementById('btnRecarregar').addEventListener('click', carregarProdutos);
-    
-    // Botão Buscar
-    document.getElementById('btnBuscar').addEventListener('click', filtrarProdutos);
-    
-    // Busca em tempo real (opcional, pode ser removido se quiser apenas botão)
-    document.getElementById('searchInput').addEventListener('keyup', function(e) {
-        if (e.key === 'Enter') {
-            filtrarProdutos();
-        }
-    });
-    
-    // Fechar modal ao clicar fora
-    document.getElementById('modalMessage').addEventListener('click', function(e) {
-        if (e.target === this) {
-            fecharModal();
-        }
-    });
+document.addEventListener('DOMContentLoaded', async () => {
+
+    await Promise.all([
+        carregarVestibulares(),
+        carregarTopicos(),
+        carregarMaterias()
+    ]);
+
+    await carregarQuestoes();
+
+    btnBuscar.addEventListener(
+        'click',
+        filtrarQuestoes
+    );
+
 });
