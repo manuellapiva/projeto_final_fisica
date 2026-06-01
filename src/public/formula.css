@@ -1,12 +1,13 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #d9cfe0;
-    font-family: 'League Spartan', sans-serif;
+  background: #e3d8e8;
+  font-family: 'League Spartan', sans-serif;
+  color: #111;
 }
 
 header {
@@ -19,35 +20,59 @@ header {
   padding: 40px;
 }
 
+#logoutButton {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'League Spartan', sans-serif;
+  transition: 0.3s;
+}
+
+#logoutButton:hover {
+  color: #8eff3f;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo h1 {
+  color: white;
+  font-size: 50px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+}
 
 .navbar {
-    width: 100%;
-    height: 100px;
-    background-color: #2b0038;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 50px;
-    gap: 30px;
+  display: flex;
+  gap: 35px;
 }
 
-.navbar a,
-.navbar button {
-    color: white;
-    text-decoration: none;
-    background: none;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    font-family: 'League Spartan', sans-serif;
-    font-weight: 600;
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
-.navbar a:hover,
-.navbar button:hover {
-    color: #8fd63c;
+.navbar a:hover {
+  color: #8eff3f;
 }
 
+.navbar .active {
+  color: #8eff3f;
+}
 
 .titulo {
     text-align: center;
@@ -78,10 +103,9 @@ header {
     padding: 0 40px 50px;
 }
 
-
 .card {
     background-color: #4d005f;
-    width: 350px;
+    width: 450px;
     min-height: 380px;
     border-radius: 30px;
     padding: 30px;
@@ -125,7 +149,6 @@ header {
     box-shadow: 0 2px 6px rgba(0,0,0,.2);
 }
 
-
 .footer {
   width: 100%;
   background: #2f003d;
@@ -154,5 +177,3 @@ header {
   font-size: 20px;
   margin-bottom: 10px;
 }
-
-/* TESTE */
