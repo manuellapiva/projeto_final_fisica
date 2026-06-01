@@ -2,19 +2,32 @@ const pool = require('../config/database');
 
 async function listarTodos() {
   const result = await pool.query(
-    'SELECT * FROM questoes ORDER BY idq'
+    'SELECT * FROM vw_questoes'
   );
   return result.rows;
 }
 
 async function buscarPorId(id) {
-  // PostgreSQL usa $1, $2, $3... como placeholders
-  // (SQLite usava ? ? ?)
-  const result = await pool.query(
-    'SELECT * FROM questoes WHERE idq = $1',
-    [id]
-  );
-  return result.rows[0];
+
+    const sql = `
+        SELECT
+            q.*,
+            r.resp_correta,
+            r.explicacao_prof,
+            r.videoaula
+        FROM questoes q
+        INNER JOIN resposta r
+            ON q.idresp = r.id_resp
+        WHERE q.idq = $1
+    `;
+
+    console.log("QUERY EXECUTADA");
+
+    const result = await pool.query(sql, [id]);
+
+    console.log(result.rows[0]);
+
+    return result.rows[0];
 }
 
 async function listarPorVestibular(vest) {
