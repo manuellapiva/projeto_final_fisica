@@ -37,6 +37,15 @@ function mostrarErro(msg) {
     `;
 }
 
+const logoutButton = document.getElementById('logoutButton');
+
+function redirectToLogin() {
+    localStorage.removeItem('jwtToken');
+    window.location.href = '/';
+}
+
+logoutButton.addEventListener('click', redirectToLogin);
+
 // ========================================
 // CARREGAR FILTROS
 // ========================================
