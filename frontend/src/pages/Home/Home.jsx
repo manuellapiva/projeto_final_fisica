@@ -40,4 +40,43 @@ export default function Home() {
             </p>
           </div>
 
-         
+          <div className={styles.card}>
+            <h3>Busca Avançada</h3>
+            <p>
+              Filtre por vestibular e tópico e
+              encontre exatamente o conteúdo
+              que precisa estudar.
+            </p>
+          </div>
+
+          <div className={styles.card}>
+            <h3>
+              Acompanhe sua evolução
+            </h3>
+            <p>
+              Monitore seus resultados e evolua
+              com estratégia.
+            </p>
+          </div>
+        </section>
+
+        <section className={styles.bottom}>
+          <h3>Pronto para começar?</h3>
+          <p>
+            Se naquela questão você esqueceu
+            como faz, veja as fórmulas.
+          </p>
+
+          <button className={styles.btnSearch}>
+            <Link
+              className={styles.btnFormulasA}
+              to="/formulas">
+              Veja as Fórmulas
+            </Link>
+          </button>
+        </section>
+      </main>
+      <Footer/>
+    </>
+  );
+}
