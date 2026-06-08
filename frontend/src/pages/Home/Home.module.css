@@ -47,3 +47,33 @@ body {
   box-shadow: 0px 4px 0px #2a0035;
   transition: 0.3s;
 }
+.btnSearchA, .btnFormulasA {
+  color: white;
+  font-size: 25px;
+  text-decoration: none;
+  transition: 0.3s
+}
+
+.btnSearch:hover {
+  transform: translateY(-3px);
+}
+
+.cards {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 120px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 350px;
+  min-height: 230px;
+  background: #8f2bb3;
+  border-radius: 12px;
+  border: 2px solid #4d0062;
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
