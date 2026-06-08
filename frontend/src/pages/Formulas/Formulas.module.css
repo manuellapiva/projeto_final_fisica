@@ -82,7 +82,7 @@ body {
     box-shadow: 0 2px 6px rgba(0,0,0,.2);
 }
 
-@media screen and (max-width: 1024px) {
+@media (max-width: 1024px) {
     .container {
         gap: 40px;
         padding: 0 30px 40px;
@@ -115,7 +115,7 @@ body {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media (max-width: 768px) {
     .titulo {
         margin-top: 25px;
         margin-bottom: 30px;
@@ -163,6 +163,6 @@ body {
         min-width: auto;
         width: 100%;
         padding: 12px 15px;
-        font-size: 18px;
+        font-size: 17px;
     }
 }
