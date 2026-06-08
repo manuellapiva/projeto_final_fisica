@@ -42,7 +42,6 @@
   color: #8eff3f;
 }
 
-/* TABLET */
 @media (max-width: 1024px) {
   .footer {
     padding: 40px 30px;
@@ -67,8 +66,6 @@
     font-size: 16px;
   }
 }
-
-/*CELULAR*/
 
 @media (max-width: 768px) {
   .footer {

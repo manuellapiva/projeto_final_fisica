@@ -109,9 +109,6 @@ body {
   margin-bottom: 40px;
 }
 
-
-
-/* TABLETS */
 @media (max-width: 1024px) {
 
   .content h2 {
@@ -135,8 +132,6 @@ body {
   }
 }
 
-
-/* CELULARES */
 @media (max-width: 768px) {
 
   .main {

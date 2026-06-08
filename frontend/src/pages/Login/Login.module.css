@@ -156,7 +156,6 @@ form {
   color: #ffb3b3;
 }
 
-/* TABLETS */
 @media (max-width: 1024px) {
   .header {
     padding: 20px;
@@ -189,7 +188,6 @@ form {
   }
 }
 
-/*  CELULARES */
 @media (max-width: 768px) {
   .header {
     justify-content: center;
