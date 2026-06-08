@@ -36,7 +36,7 @@ export default function QuestaoCard({ questao }) {
   return (
     <div className={styles.questaoBox}>
       <div className={styles.tags}>
-        <span>{questao.vestibular}</span>
+        <span>{questao.sigla}</span>
 
         <span>{questao.ano}</span>
 
