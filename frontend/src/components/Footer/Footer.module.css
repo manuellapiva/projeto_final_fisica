@@ -41,3 +41,71 @@
 .logoutButton:hover {
   color: #8eff3f;
 }
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .footer {
+    padding: 40px 30px;
+    gap: 30px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footerLogo h2 {
+    font-size: 50px;
+  }
+
+  .footerColumn h4 {
+    font-size: 24px;
+  }
+
+  .footerColumn p {
+    font-size: 18px;
+  }
+
+  .logoutButton {
+    font-size: 16px;
+  }
+}
+
+/*CELULAR*/
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+    gap: 25px;
+  }
+
+  .footerLogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footerLogo h2 {
+    font-size: 38px;
+    margin-bottom: 15px;
+  }
+
+  .footerColumn {
+    width: 100%;
+  }
+
+  .footerColumn h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .footerColumn p {
+    font-size: 16px;
+    margin-bottom: 6px;
+    word-break: break-word;
+  }
+
+  .logoutButton {
+    font-size: 15px;
+  }
+}

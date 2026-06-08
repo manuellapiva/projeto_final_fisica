@@ -199,3 +199,240 @@ body {
     border-top: 1px solid rgba(255,255,255,0.3);
     margin: 12px 0;
 }
+
+@media (max-width: 1024px) {
+
+    .filtros {
+        width: 90%;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .filtroGrupo select {
+        width: 200px;
+    }
+
+    .tags {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .tags span {
+        font-size: 1rem;
+        padding: 8px 20px;
+    }
+
+    .enunciado {
+        font-size: 1.3rem;
+    }
+
+    .alternativa {
+        font-size: 1.1rem;
+        height: auto;
+        min-height: 55px;
+        padding: 15px 20px;
+    }
+
+    .btnResposta {
+        width: 200px;
+        font-size: 1.2rem;
+    }
+
+    .respostaConteudo h3 {
+        font-size: 2rem;
+    }
+
+    .respostaConteudo p {
+        font-size: 1.2rem;
+    }
+
+    .imagemQuestao img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .questaoBox {
+        width: 95%;
+    }
+
+    .tags {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .tags span {
+        padding: 8px 18px;
+        font-size: 1rem;
+    }
+
+    .enunciado {
+        font-size: 1.25rem;
+    }
+
+    .alternativa {
+        font-size: 1.1rem;
+        min-height: 60px;
+        height: auto;
+        padding: 15px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .filtrosContainer {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .filtros {
+        width: 100%;
+        margin: 30px 0;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 15px;
+    }
+
+    .filtroGrupo {
+        width: 100%;
+    }
+
+    .filtroGrupo label {
+        text-align: left;
+        margin-left: 10px;
+    }
+
+    .filtroGrupo select {
+        width: 100%;
+    }
+
+    .btnBuscar {
+        width: 100%;
+    }
+
+    .questaoBox {
+        width: 98%;
+        padding: 15px;
+    }
+
+    .questaoCard {
+        padding: 15px;
+    }
+
+    .tags {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tags span {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+
+    .enunciado {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    .imagemQuestao {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .imagemQuestao img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .alternativa {
+        font-size: 1rem;
+        height: auto;
+        min-height: 55px;
+        padding: 15px;
+        border-radius: 18px;
+    }
+
+    .btnResposta {
+        width: 100%;
+        font-size: 1.1rem;
+        height: 50px;
+    }
+
+    .respostaConteudo {
+        padding: 12px;
+    }
+
+    .respostaConteudo h3 {
+        font-size: 1.5rem;
+    }
+
+    .respostaConteudo p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+        .questaoBox {
+        width: 98%;
+        padding: 12px;
+        border-radius: 18px;
+    }
+
+    .questaoCard {
+        padding: 12px;
+        border-radius: 18px;
+    }
+
+    .tags {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .tags span {
+        width: 100%;
+        text-align: center;
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .enunciado {
+        font-size: 1rem;
+        line-height: 1.6;
+        text-align: left;
+    }
+
+    .alternativas {
+        gap: 10px;
+    }
+
+    .alternativa {
+        min-height: 55px;
+        height: auto;
+        padding: 12px 15px;
+        font-size: 0.95rem;
+        border-radius: 15px;
+    }
+
+    .btnResposta {
+        width: 100%;
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    .respostaConteudo {
+        padding: 15px;
+    }
+
+    .respostaConteudo h3 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    .respostaConteudo p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+}
