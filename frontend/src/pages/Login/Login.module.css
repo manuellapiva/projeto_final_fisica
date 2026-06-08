@@ -155,3 +155,103 @@ form {
   font-weight: 600;
   color: #ffb3b3;
 }
+
+/* TABLETS */
+@media (max-width: 1024px) {
+  .header {
+    padding: 20px;
+    height: auto;
+  }
+
+  .logo h1 {
+    font-size: 38px;
+  }
+
+  .logo img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .mainContainer {
+    padding: 40px 20px;
+  }
+
+  .loginSection {
+    padding: 40px 30px;
+  }
+
+  .loginSection h2 {
+    font-size: 55px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+}
+
+/*  CELULARES */
+@media (max-width: 768px) {
+  .header {
+    justify-content: center;
+    padding: 15px;
+    height: auto;
+  }
+
+  .logo {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .logo h1 {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .logo img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .mainContainer {
+    padding: 20px 15px;
+  }
+
+  .loginSection {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+
+  .loginSection h2 {
+    font-size: 45px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  .formRow label {
+    font-size: 16px;
+  }
+
+  .formRow input {
+    height: 50px;
+    font-size: 16px;
+    padding: 15px 20px;
+  }
+
+  .buttonRow button {
+    width: 100%;
+    max-width: 280px;
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .loginLink {
+    font-size: 14px;
+  }
+
+  .message {
+    font-size: 14px;
+  }
+}
