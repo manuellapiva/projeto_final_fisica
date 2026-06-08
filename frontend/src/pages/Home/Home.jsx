@@ -22,4 +22,22 @@ export default function Home() {
             aprimore seus conhecimentos.
           </p>
 
+          <button className={styles.btnSearch}>
+            <Link className={styles.btnSearchA} to="/questoes">
+              Buscar questões
+            </Link>
+          </button>
+        </section>
+
+        <section className={styles.cards}>
+          <div className={styles.card}>
+            <h3>
+              Treine Física de Verdade
+            </h3>
+            <p>
+              Questões dos vestibulares pra você
+              praticar sem parar.
+            </p>
+          </div>
+
          
