@@ -86,3 +86,48 @@ export default function QuestaoCard({ questao }) {
             </button>
           )}
         </div>
+                <button
+          className={styles.btnResposta}
+          onClick={buscarResposta}
+        >
+          {mostrarResposta
+            ? "OCULTAR RESPOSTA"
+            : "VER RESPOSTA"}
+        </button>
+
+        {mostrarResposta &&
+          resposta && (
+            <div
+              className={
+                styles.caixaResposta
+              }
+            >
+              <div
+                className={
+                  styles.respostaConteudo
+                }
+              >
+                <h3>
+                  Resposta Correta
+                </h3>
+
+                <p>
+                  {
+                    resposta.resp_correta
+                  }
+                </p>
+
+                <hr />
+
+                <p>
+                  {
+                    resposta.explicacao_prof
+                  }
+                </p>
+              </div>
+            </div>
+          )}
+      </div>
+    </div>
+  );
+}
