@@ -1,0 +1,43 @@
+.footer {
+  width: 100%;
+  background: #2f003d;
+  color: white;
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 50px;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footerLogo h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 67px;
+    font-weight:400;
+    margin-bottom:30px;
+}
+
+.footerColumn h4 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.footerColumn p {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.logoutButton {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'League Spartan', sans-serif;
+  transition: 0.3s;
+}
+
+.logoutButton:hover {
+  color: #8eff3f;
+}
