@@ -41,3 +41,87 @@ export default function Formulas() {
             </div>
           </div>
         </div>
+
+         <div className={styles.card}>
+          <h2>TERMOLOGIA</h2>
+          <div className={styles.formula}>
+            <span>CALOR SENSÍVEL</span>
+            <div className={styles.caixa}>
+              Q = m·c·Δt
+            </div>
+          </div>
+
+          <div className={styles.formula}>
+            <span>CALOR LATENTE</span>
+            <div className={styles.caixa}>
+              Q = m·L
+            </div>
+          </div>
+
+          <div className={styles.formula}>
+            <span>
+              1ª LEI DA TERMODINÂMICA
+            </span>
+            <div className={styles.caixa}>
+              Q = τ + ΔU
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.card}>
+          <h2>ONDULATÓRIA</h2>
+          <div className={styles.formula}>
+            <span>FREQUÊNCIA</span>
+            <div className={styles.caixa}>
+              f = 1/T
+            </div>
+          </div>
+
+          <div className={styles.formula}>
+            <span>LEI DE SNELL</span>
+            <div className={styles.caixa}>
+              n₁sen(θ₁)=n₂sen(θ₂)
+            </div>
+          </div>
+
+          <div className={styles.formula}>
+            <span>EQ. DE GAUSS</span>
+            <div className={styles.caixa}>
+              1/f = 1/p + 1/p'
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.card}>
+          <h2>ELETRICIDADE</h2>
+          <div className={styles.formula}>
+            <span>LEI DE COULOMB</span>
+            <div className={styles.caixa}>
+              F = k·q₁·q₂ / d²
+            </div>
+          </div>
+
+          <div className={styles.formula}>
+            <span>
+              CORRENTE ELÉTRICA
+            </span>
+            <div className={styles.caixa}>
+              i = Q / Δt
+            </div>
+          </div>
+
+          <div className={styles.formula}>
+            <span>
+              POTÊNCIA ELÉTRICA
+            </span>
+            <div className={styles.caixa}>
+              P = U·i
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Footer/>
+    </>
+  );
+}
