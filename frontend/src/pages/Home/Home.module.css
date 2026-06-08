@@ -108,3 +108,93 @@ body {
   line-height: 1.4;
   margin-bottom: 40px;
 }
+
+
+
+/* TABLETS */
+@media (max-width: 1024px) {
+
+  .content h2 {
+    font-size: 60px;
+  }
+
+  .content p {
+    font-size: 24px;
+  }
+
+  .bottom {
+    width: 90%;
+  }
+
+  .bottom h3 {
+    font-size: 2.5rem;
+  }
+
+  .bottom p {
+    font-size: 24px;
+  }
+}
+
+
+/* CELULARES */
+@media (max-width: 768px) {
+
+  .main {
+    padding: 30px 20px;
+  }
+
+  .content h2 {
+    font-size: 42px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .content p {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  .btnSearch {
+    width: 250px;
+    height: 60px;
+  }
+
+  .btnSearchA,
+  .btnFormulasA {
+    font-size: 20px;
+  }
+
+  .cards {
+    gap: 20px;
+    margin-top: 60px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 400px;
+    min-height: auto;
+    padding: 25px;
+  }
+
+  .card h3 {
+    font-size: 1.6rem;
+  }
+
+  .card p {
+    font-size: 18px;
+  }
+
+  .bottom {
+    width: 100%;
+    padding: 30px 20px;
+    margin-top: 60px;
+  }
+
+  .bottom h3 {
+    font-size: 2rem;
+  }
+
+  .bottom p {
+    font-size: 18px;
+  }
+}

@@ -61,3 +61,65 @@
 .navbar .active {
   color: #8eff3f;
 }
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .header {
+    padding: 25px;
+  }
+
+  .logo h1 {
+    font-size: 40px;
+  }
+
+  .logo img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .navbar {
+    gap: 25px;
+  }
+
+  .navbar a,
+  .logoutButton {
+    font-size: 16px;
+  }
+}
+
+/* CELULAR */
+@media (max-width: 768px) {
+  .header {
+    height: auto;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .logo {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .logo h1 {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .logo img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .navbar {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .navbar a,
+  .logoutButton {
+    font-size: 15px;
+  }
+}
