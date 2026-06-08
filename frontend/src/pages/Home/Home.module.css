@@ -17,3 +17,14 @@ body {
   align-items: center;
   padding-top: 70px;
 }
+
+.content {
+  text-align: center;
+}
+
+.content h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: 90px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
