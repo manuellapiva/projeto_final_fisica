@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "./Questoes.module.css";
 import API_URL from "../../services/api";
 import Header from '../../components/Header/Header'
@@ -7,7 +6,6 @@ import Footer from '../../components/Footer/Footer'
 import QuestaoCard from "../../components/QuestaoCard/QuestaoCard";
 
 export default function Questoes() {
-  const navigate = useNavigate();
   const [questoes, setQuestoes] = useState([]);
   const [todasQuestoes, setTodasQuestoes] = useState([]);
   const [vestibulares, setVestibulares] = useState([]);
