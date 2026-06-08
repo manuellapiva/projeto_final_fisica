@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Formulas.module.css";
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
