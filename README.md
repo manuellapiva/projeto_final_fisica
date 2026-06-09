@@ -1,4 +1,4 @@
-# Projeto Final Física SENAI
+# Projeto Final Física SENAI - BuscFísica 👩‍💻⚛️
 
 ## Visão geral
 
