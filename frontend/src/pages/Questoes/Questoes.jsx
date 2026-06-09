@@ -36,8 +36,6 @@ export default function Questoes() {
         fetch(`${API_URL}/topico`)
       ]);
       const questoesData = await questoesRes.json();
-      console.log("questoesData:", questoesData);
-console.log("É array?", Array.isArray(questoesData));
       const vestibularesData = await vestibularesRes.json();
       const materiasData = await materiasRes.json();
       const topicosData = await topicosRes.json();
